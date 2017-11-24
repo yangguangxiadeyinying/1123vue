@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<style>
+    *{
+        padding:0;
+        margin:0;
+    }
+    .meum{
+        width:20%;
+        height: 500px;
+    }
+    .aaa{
+        width: 100%;
+        height: 20px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+    }
+    .bbb{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body>
+<div class="meum">
+        <box name="一级菜单" :name1="name1"></box>
+</div>
+</body>
+</html>
+<script>
+    Vue.component("box",{
+        props:["name","name1"],
+        data: function() {
+            return {
+                show: false
+            };
+        },
+        template:`<ul class='aaa'@click="show1()" >{{name}}<li class='bbb' v-show="show==true" v-for="item in name1">{{item}}</li></ul>`,
+        methods:{
+            show1(){
+                if(!this.show){
+                    this.show=true;
+                }else{
+                    this.show=false;
+                }
+            }
+        }
+    })
+    var vm=new Vue({
+        el:".meum",
+        data: function() {
+            return {
+                name1: ["二级菜单", "二级菜单", "二级菜单", "二级菜单"],
+            };
+        }
+    });
+</script>
